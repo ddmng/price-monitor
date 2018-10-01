@@ -149,8 +149,7 @@ describe('Search page queries work', function () {
   })
 
   it.only('click on a target and verify that it loads its page', () => {
-
-    cy.get(selectors.search.boxTarget, {timeout: 8000}).click()
+    cy.get(selectors.search.boxTarget + ' > :nth-child(1) > .card > .card-body > :nth-child(1) > .col > .h5 > a', {timeout: 8000}).first().click()
     cy.url().should('match', /gps-hq/)
   })
 
