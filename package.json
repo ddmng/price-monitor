@@ -1,0 +1,26 @@
+{
+  "name": "genesi-e2e",
+  "version": "1.0.0",
+  "description": "Genesi e2e cypress test suite",
+  "scripts": {
+    "start": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.genesi.lan:d.diminica/genesi-e2e.git"
+  },
+  "keywords": [
+    "tests",
+    "genesi",
+    "cypress",
+    "cypressjs"
+  ],
+  "author": "ddm",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.1"
+  }
+}
