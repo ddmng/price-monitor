@@ -142,7 +142,7 @@ describe('Search page', function () {
     cy.get(selectors.search.warrantBadge).click()
     cy.get(selectors.search.ccBadge).click()
     cy.get(selectors.search.groupBadge).click()
-    cy.expect(cy.get('.text-muted').contains('No result found'))
+    cy.expect(cy.get(selectors.search.noResults).contains('No result found'))
     //cy.get('.text-muted').contains('No result found')
 
     // open filters sidebar
