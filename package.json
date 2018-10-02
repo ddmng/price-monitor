@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Genesi e2e cypress test suite",
   "scripts": {
-    "start": "cypress open"
+    "start": "cypress open",
+    "ci-headed": "cypress run --headed",
+    "ci": "cypress run --headless"
   },
   "repository": {
     "type": "git",
