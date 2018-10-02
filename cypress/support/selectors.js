@@ -55,5 +55,14 @@ export default {
         groupBadge: '#idBtnIncludeGroup',
         lowBattBadge: '#idBadgebatteryLevel',
         emptyBatteryIcon: '.battery-empty'
+    },
+    deferred: {
+        datePicker: '[name=daterangeInput]',
+        today: '[data-range-key=Today]',
+        yesterday: '[data-range-key=Yesterday]',
+        lastTwoDays: '[data-range-key="Last 2 days"]',
+        thisWeek: '[data-range-key="This week"]',
+        lastWeek: '[data-range-key="Last week"]',
+        selectedDate: '[name=daterangeInput]'
     }
 }
