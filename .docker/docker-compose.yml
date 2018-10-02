@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  e2e:
+    hostname: e2e
+    image: e2e:dev
+    environment:
+      - CI=1
+      - STACK_NAME=genesi
+    volumes:
+      - /dev/shm:/dev/shm
+    dns:
+      - 8.8.8.8
+    command: /ng-app/.docker/devel.sh test
