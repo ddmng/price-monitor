@@ -14,28 +14,39 @@ export default {
         logout: '[href*=login]'
     },
     sidebar: {
-        target: '.ng-star-inserted > .p-1'
+        target1: ':nth-child(2) > .nav-item > .ng-star-inserted > .p-1 > .row > #idTargetName'
     },
     search: {
+        // common fields
         searchField: '#idSearchField',
         searchButton: '#searchButton',
+        
+        // side filters
         filterButton: '#filterButton',
+        
         warrantsToggle: '#idSwitchWarrants',
         ccToggle: '#idSwitchCriminalCases',
         targetsToggle: '#idSwitchTargets',
+        groupsToggle: '#idSwitchTargetGroups',
+        lowBatt: '#idSwitchLowBattery',
+        statusSelect: '#idInputStatusValue',
+
         boxTarget: 'gn-box-target',
         boxWarrant: 'gn-box-warrant',
         boxCC: 'gn-box-criminalcase',
+        boxGroup: 'gn-box-group',
+        
+        // pagination
         totals: '#idTotalItems',
         changeNumPages: '#idBtnChangeNumPages',
         lastPage: '.pagination-last > .page-link',
         activePage: '.active > .page-link',
+        
+        // badges
         targetBadge: '#idBtnIncludeTarget',
         warrantBadge: '#idBtnIncludeWarrants',
         ccBadge: '#idBtnIncludeCriminalCases',
         groupBadge: '#idBtnIncludeGroup',
-        lowBatt: '#idSwitchLowBattery',
         lowBattBadge: '#idBadgebatteryLevel',
-        statusSelect: '#idInputStatusValue'
     }
 }

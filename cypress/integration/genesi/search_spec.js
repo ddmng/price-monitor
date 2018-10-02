@@ -1,6 +1,6 @@
 import selectors from '../../support/selectors'
 
-describe('Search page queries work', function () {
+describe('Search page', function () {
 
   before('Login and route to search page', function () {
     cy.visit('/')
@@ -19,7 +19,7 @@ describe('Search page queries work', function () {
   })
 
 
-  beforeEach('Search all', () => {
+  beforeEach('restore local storage and search all', () => {
     cy.restoreLocalStorage();
     cy.reload()
     cy.server()
@@ -34,21 +34,22 @@ describe('Search page queries work', function () {
   });
 
 
-  it('Searches pressing enter', function () {
+  it('searches pressing enter', function () {
     cy.server()
     cy.route('POST', '**/search/simple/*').as('search')
 
-    cy.get(selectors.search.searchField).type('savastano{enter}')
+    cy.get(selectors.search.searchField).type('target1{enter}')
 
     cy.wait('@search')
-    cy.contains('Savastano')
+    cy.contains('target1')
 
-    cy.route('**/targets/2').as('target1')
-    cy.get(selectors.search.searchField).clear().type('daniele')
+    cy.route('**/targets/1').as('target1')
+    cy.get(selectors.search.searchField).clear().type('{enter}')
+    cy.get(selectors.search.searchField).clear().type('target1')
     cy.get(selectors.search.searchButton).click()
 
     cy.wait('@target1')
-    cy.contains('Savastano')
+    cy.contains('target1')
   })
 
 
@@ -57,21 +58,24 @@ describe('Search page queries work', function () {
 
     // remove warrants filter
     cy.get(selectors.search.warrantsToggle).click()
-
     // remove criminal cases filter
     cy.get(selectors.search.ccToggle).click()
+    // remove groups filter
+    cy.get(selectors.search.groupsToggle).click()
 
-    cy.get(selectors.search.boxTarget).should('have.length', 10)
+    cy.get(selectors.search.boxTarget).should('have.length', 5)
     cy.get(selectors.search.boxWarrant).should('have.length', 0)
     cy.get(selectors.search.boxCC).should('have.length', 0)
+    cy.get(selectors.search.boxGroup).should('have.length', 0)
 
     // remove target filter
     cy.get(selectors.search.targetsToggle).click()
     // set warrants filter
     cy.get(selectors.search.warrantsToggle).click()
     cy.get(selectors.search.boxTarget).should('have.length', 0)
-    cy.get(selectors.search.boxWarrant).should('have.length', 6)
+    cy.get(selectors.search.boxWarrant).should('have.length', 2)
     cy.get(selectors.search.boxCC).should('have.length', 0)
+    cy.get(selectors.search.boxGroup).should('have.length', 0)
 
     // remove warrants filter
     cy.get(selectors.search.warrantsToggle).click()
@@ -79,20 +83,30 @@ describe('Search page queries work', function () {
     cy.get(selectors.search.ccToggle).click()
     cy.get(selectors.search.boxTarget).should('have.length', 0)
     cy.get(selectors.search.boxWarrant).should('have.length', 0)
-    cy.get(selectors.search.boxCC).should('have.length', 6)
+    cy.get(selectors.search.boxCC).should('have.length', 2)
+    cy.get(selectors.search.boxGroup).should('have.length', 0)
 
+    // remove cc filter
+    cy.get(selectors.search.ccToggle).click()
+    // set criminalcases filter
+    cy.get(selectors.search.groupsToggle).click()
+    cy.get(selectors.search.boxTarget).should('have.length', 0)
+    cy.get(selectors.search.boxWarrant).should('have.length', 0)
+    cy.get(selectors.search.boxCC).should('have.length', 0)
+    cy.get(selectors.search.boxGroup).should('have.length', 2)
+    
   })
 
-  it('Should click on pagination and change elements for the page', () => {
+  it('should change pagination parameter', () => {
     cy.server()
     cy.route('POST', '**/search/simple/*').as('search')
 
-    cy.get(selectors.search.totals).contains('43')
+    cy.get(selectors.search.totals).contains('11')
     cy.get(selectors.search.changeNumPages).contains('10')
     cy.get(selectors.search.lastPage).click()
     cy.wait('@search')
 
-    cy.get(selectors.search.activePage).contains('5')
+    cy.get(selectors.search.activePage).contains('2')
     cy.get(selectors.search.changeNumPages).click({
       waitForAnimations: false
     });
@@ -120,9 +134,9 @@ describe('Search page queries work', function () {
   })
 
 
-  it('Should check that by clicking on the badges, the filters are deactivated', () => {
+  it('should deactivate filters clicking on the badges', () => {
     cy.server()
-    cy.route('**/targets/20').as('target20')
+    cy.route('**/targets/1').as('target1')
 
     cy.get(selectors.search.targetBadge).click()
     cy.get(selectors.search.warrantBadge).click()
@@ -140,12 +154,12 @@ describe('Search page queries work', function () {
     cy.get(selectors.search.lowBatt).click()
     cy.expect(cy.get(selectors.search.lowBattBadge).contains('Low battery'))
 
-    cy.wait('@target20')
-    cy.expect(cy.get(':nth-child(2) > div[_ngcontent-c3=""] > gn-box-target > :nth-child(1) > .card > .card-footer > .d-flex > .justify-content-flex-start > .ng-star-inserted > .battery-empty').should('have.class', 'battery-empty'))
+    cy.wait('@target1')
+    cy.expect(cy.get('.battery-empty').should('have.length', 1))
     cy.get(selectors.search.statusSelect).select('1').contains('Active')
   })
 
-  it('click on a target and verify that it loads its page', () => {
+  it('loads a target clicking on its name', () => {
     cy.get(selectors.search.boxTarget + ' > :nth-child(1) > .card > .card-body > :nth-child(1) > .col > .h5 > a', {timeout: 8000}).first().click()
     cy.url().should('match', /gps-hq/)
   })
