@@ -26,7 +26,6 @@ install:
 
   script:
     - docker build -t e2e:ci -f .docker/Dockerfile .
-    - docker run --rm e2e:ci "$(npm bin)/cypress verify"
 
 # two jobs that run after "install" job finishes
 # NPM dependencies and Cypress binary should be already installed
