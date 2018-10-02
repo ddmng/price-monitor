@@ -8,4 +8,7 @@ COPY package.json /ng-app/
 # needed to override frontend's package.json
 RUN npm i
 
-CMD ash
+COPY cypress /ng-app/cypress
+COPY cypress.json /ng-app/cypress.json
+
+CMD $(npm bin)/cypress run

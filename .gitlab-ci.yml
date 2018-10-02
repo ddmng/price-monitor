@@ -23,7 +23,6 @@ cache:
 # this job installs NPM dependencies and Cypress
 install:
   stage: build
-
   script:
     - docker build -t e2e:ci -f .docker/Dockerfile .
 
@@ -32,7 +31,7 @@ install:
 cypress-e2e:
   stage: test
   script:
-    - $(npm bin)/cypress run
+    - docker run --rm e2e:ci 
   artifacts:
     expire_in: 1 week
     when: always
@@ -40,16 +39,3 @@ cypress-e2e:
     - cypress/screenshots
     - cypress/videos
 
-cypress-e2e-chrome:
-  image: cypress/browsers:chrome67
-  stage: test
-  script:
-    - $(npm bin)/cypress run --browser chrome
-  artifacts:
-    expire_in: 1 week
-    when: always
-    paths:
-    - cypress/screenshots
-    - cypress/videos
-
-# tip: lint this file using https://gitlab.com/ci/lint
