@@ -37,3 +37,13 @@ Cypress.Commands.add("restoreLocalStorage", () => {
     localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
   });
 });
+
+/* TODO:
+
+Add a test setup stage that:
+ 
+  * starts fake targets in realtime to open/close realtime panel and follow on map
+  * triggers target proximity start/end
+  * triggers zone violation in/out
+
+*/
