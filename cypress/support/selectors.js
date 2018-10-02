@@ -14,7 +14,7 @@ export default {
         logout: '[href*=login]'
     },
     sidebar: {
-        targetAlessio: ':nth-child(5) > .nav-item > .ng-star-inserted > .p-1 > .row > #idTargetName'
+        target: '.ng-star-inserted > .p-1'
     },
     search: {
         searchField: '#idSearchField',

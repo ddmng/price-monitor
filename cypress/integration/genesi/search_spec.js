@@ -7,7 +7,6 @@ describe('Search page queries work', function () {
     cy.get(selectors.login.username, {
       timeout: 8000
     })
-    //cy.wait(8000)
 
     cy.fixture('users').then(function (users) {
       cy.get(selectors.login.username).type(users[0].username)
