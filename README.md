@@ -45,6 +45,20 @@ List of tests made and still to be written:
     * [ ] pagination
     * [x] badges
     * [x] jump to target deferred data on click
+ * realtime
+    * [ ] zoom in/out
+    * [ ] pan
+    * [ ] change map style
+    * [ ] realtime target list is present
+    * [ ] realtime target list open/collapse
+    * [ ] fullscreen on/off
+    * [ ] open/close menu
+    * [ ] change map style
+    * [ ] mapo toggles---> multiple
+    * [ ] edit zones
+    * [ ] edit pois
+    * [ ] zone violation in-out
+    * [ ] nearby start-end
 
 ## Develop
 Clone the repo, run `npm install`, start with `npm start`.
