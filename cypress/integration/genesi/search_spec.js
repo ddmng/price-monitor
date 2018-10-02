@@ -34,7 +34,7 @@ describe('Search page', function () {
   });
 
 
-  it('searches pressing enter', function () {
+  it('should search pressing enter', function () {
     cy.server()
     cy.route('POST', '**/search/simple/*').as('search')
 
