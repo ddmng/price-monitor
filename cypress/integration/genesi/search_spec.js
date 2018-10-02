@@ -142,6 +142,7 @@ describe('Search page', function () {
     cy.get(selectors.search.warrantBadge).click()
     cy.get(selectors.search.ccBadge).click()
     cy.get(selectors.search.groupBadge).click()
+    cy.log('TOTAL ITEMS', cy.get('.text-muted'))
     cy.expect(cy.get('.text-muted').contains('lbl_noResults'))
 
     // open filters sidebar
