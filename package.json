@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cypress open",
     "ci-headed": "cypress run --headed",
-    "ci": "cypress run --headless"
+    "ci": "cypress run"
   },
   "repository": {
     "type": "git",
