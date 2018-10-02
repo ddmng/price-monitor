@@ -27,8 +27,6 @@ describe('Search page queries work', function () {
     cy.wait('@search', {
       timeout: 10000
     })
-
-    //    cy.get(selectors.search.searchField).clear().type('{enter}')
   })
 
   afterEach(() => {

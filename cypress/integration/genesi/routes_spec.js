@@ -18,19 +18,29 @@ describe('Routes are correct', function () {
         cy.restoreLocalStorage();
     })
 
-    it('Check routes clicking on menu bar', function () {
+    afterEach(() => {
+        cy.saveLocalStorage();
+    });
+
+    it('Navbar>Search', function () {
         cy.get(selectors.navbar.search).click()
         cy.url().should('match', /\/search/)
         cy.get(selectors.navbar.search).should('have.class', 'header-link-active')
+    })
 
+    it('Navbar>Realtime', function () {
         cy.get(selectors.navbar.realtime).click()
         cy.url().should('match', /\/realtime/)
         cy.get(selectors.navbar.realtime).should('have.class', 'header-link-active')
+    })
 
+    it('Sidebar>Target1', function () {
         cy.get(selectors.sidebar.target).click()
         cy.url().should('match', /\/gps-hq/)
         cy.get(selectors.sidebar.target).should('have.class', 'active')
+    })
 
+    it('Navbar>Logout', function () {
         cy.get(selectors.navbar.avatar).click()
         cy.get(selectors.navbar.logout).click()
         cy.url().should('match', /\/login/)
