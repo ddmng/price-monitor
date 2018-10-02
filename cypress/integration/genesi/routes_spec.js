@@ -35,9 +35,9 @@ describe('Routes are correct', function () {
     })
 
     it('Sidebar>Target1', function () {
-        cy.get(selectors.sidebar.target).click()
+        cy.get(selectors.sidebar.target1).click()
         cy.url().should('match', /\/gps-hq/)
-        cy.get(selectors.sidebar.target).should('have.class', 'active')
+        cy.get(selectors.sidebar.target1).should('have.class', 'active')
     })
 
     it('Navbar>Logout', function () {
