@@ -22,17 +22,15 @@ cache:
 
 # this job installs NPM dependencies and Cypress
 install:
-  image: cypress/base:10
   stage: build
 
   script:
-    - npm ci
-    - $(npm bin)/cypress verify
+    - docker build -t e2e:ci -f .docker/Dockerfile .
+    - docker run --rm e2e:ci "$(npm bin)/cypress verify"
 
 # two jobs that run after "install" job finishes
 # NPM dependencies and Cypress binary should be already installed
 cypress-e2e:
-  image: cypress/base:10
   stage: test
   script:
     - $(npm bin)/cypress run

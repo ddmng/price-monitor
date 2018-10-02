@@ -1,11 +1,6 @@
-FROM registry.genesi.lan/genesi.common/node9:dev
+FROM cypress/base:10
 
-RUN apk update && apk --no-cache add \
-    xvfb \
-    udev \
-    ttf-freefont \
-    curl
-
+RUN mkdir /ng-app
 WORKDIR /ng-app
 
 COPY package.json /ng-app/
