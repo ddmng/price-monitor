@@ -1,6 +1,9 @@
+/// <reference types="Cypress" />
+
+import selectors from '../../support/selectors'
+
 /* TODO:
  
- * filter textbox
  * open/close sidebar
  * number of targets in realtime
  * open/close realtime panel
@@ -37,26 +40,27 @@ describe('Sidebar', function () {
     });
 
 
-    it('shoud contain', () => {
-        cy.expect(cy.get(':nth-child(10) > .nav-item > .p-1 > #idTargetName').contains('Mario Rossi'))
-        cy.expect(cy.get('.sidebar-nav > :nth-child(4) > :nth-child(1) > .col > #idWarrantName').contains('Banda della Magliana'))
-        cy.expect(cy.get('.sidebar-nav > :nth-child(6) > :nth-child(4) > .col > #idCriminalCaseName').contains('Omicidio a Roma'))
+    it('should filter target list', () => {
+        cy.get(selectors.sidebar.q).clear().type('1')
+        cy.get(selectors.sidebar.targetList).contains('target1')
+        cy.get(selectors.sidebar.targetList).contains('group1')
+        cy.get(selectors.sidebar.targetList).find(selectors.sidebar.rows).should('have.length', 2)
+
+        cy.get(selectors.sidebar.q).clear().type('2')
+        cy.get(selectors.sidebar.targetList).contains('target2')
+        cy.get(selectors.sidebar.targetList).contains('group2')
+        cy.get(selectors.sidebar.targetList).find(selectors.sidebar.rows).should('have.length', 2)
+
+        cy.get(selectors.sidebar.q).clear()
+        cy.get(selectors.sidebar.targetList).find(selectors.sidebar.rows).should('have.length', 7)
+
     })
 
-    it('check the text search', () => {
-        cy.log('TEST - should returns the value for the finded record in the list')
-        cy.get('#idSidebarSearch').clear().type('sav')
-        cy.contains('Pietro Savastano')
 
-        cy.log('TEST - should returns a message if the search did not produce results')
-        cy.get('#idSidebarSearch').clear().type('xxx')
-        cy.expect(cy.get('#idNoItems').contains('Nessun risulato trovato'))
-    })
-
-
-    it.only('click on icon that close and minimize the sidebar and select a target at the same time', () => {
-        let minimizerButton = cy.get('#idSidebarButton');
-        cy.expect(minimizerButton.click())
+    it('click on icon that close and minimize the sidebar and select a target at the same time', () => {
+        cy.get(selectors.sidebar.minimizer).click()
+        cy.get('body').should('have.class', 'sidebar-minimized')
+        // TODO: mettere expect
     })
 
 })

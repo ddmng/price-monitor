@@ -14,7 +14,12 @@ export default {
         logout: '[href*=login]'
     },
     sidebar: {
-        target1: ':nth-child(3) > .nav-item > .ng-star-inserted > .p-1'
+        target1: ':nth-child(3) > .nav-item > .ng-star-inserted > .p-1',
+        targetList: '.sidebar-nav',
+        q: '#idSidebarSearch',
+        rows: '.row',
+        minimizer: '#idSidebarButton',
+        sidebar: '.sidebar'
     },
     search: {
         // common fields
