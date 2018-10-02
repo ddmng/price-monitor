@@ -134,7 +134,7 @@ describe('Search page', function () {
   })
 
 
-  it('should deactivate filters clicking on the badges', () => {
+  it.only('should deactivate filters clicking on the badges', () => {
     cy.server()
     cy.route('**/targets/1').as('target1')
 
@@ -142,8 +142,8 @@ describe('Search page', function () {
     cy.get(selectors.search.warrantBadge).click()
     cy.get(selectors.search.ccBadge).click()
     cy.get(selectors.search.groupBadge).click()
-    cy.log('TOTAL ITEMS', cy.get('.text-muted'))
-    cy.expect(cy.get('.text-muted').contains('lbl_noResults'))
+    cy.expect(cy.get('.text-muted').contains('No result found'))
+    //cy.get('.text-muted').contains('No result found')
 
     // open filters sidebar
     cy.get(selectors.search.filterButton).click()
@@ -156,7 +156,7 @@ describe('Search page', function () {
     cy.expect(cy.get(selectors.search.lowBattBadge).contains('Low battery'))
 
     cy.wait('@target1')
-    cy.expect(cy.get('.battery-empty').should('have.length', 1))
+    cy.expect(cy.get(selectors.search.emptyBatteryIcon).should('have.length', 1))
     cy.get(selectors.search.statusSelect).select('1').contains('Active')
   })
 

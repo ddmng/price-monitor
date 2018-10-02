@@ -43,6 +43,7 @@ export default {
         
         // pagination
         totals: '#idTotalItems',
+        noResults: '.text-muted',
         changeNumPages: '#idBtnChangeNumPages',
         lastPage: '.pagination-last > .page-link',
         activePage: '.active > .page-link',
@@ -53,5 +54,6 @@ export default {
         ccBadge: '#idBtnIncludeCriminalCases',
         groupBadge: '#idBtnIncludeGroup',
         lowBattBadge: '#idBadgebatteryLevel',
+        emptyBatteryIcon: '.battery-empty'
     }
 }
