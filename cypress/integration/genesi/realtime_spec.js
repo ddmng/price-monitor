@@ -44,27 +44,21 @@ describe('Realtime', () => {
   });
   
   after(() => {
-    cy.exec('docker stop fake_target_clark_kent_on_test')
+    cy.stopTarget(21111)
 
-    cy.get('.toast-warning').click()
-
+    cy.get('.toast-warning',{timeout: 20000}).click()
   })
 
   /** TESTS */
 
-  it('Goes in fullscreen', () => {
-    cy.get('.position > .fal').click()
-    cy.exec('docker run -d -e --rm SERVER_HOST=testbed.genesi.lan -e FAKE_DEVICE_SERIAL=21111 -e FAKE_PATH_RDJSON=path2.ndjson --name fake_target_clark_kent_on_test registry.genesi.lan/genesi/fake_targets:dev')
-    // targets 21111
-    //         21112
-    //         21113
-    cy.get('.toast-success', {timeout: 10000}).click()
+  it('', () => {
+    cy.startTarget(21111)
+
+    cy.get('.toast-success', {timeout: 20000}).click()
     cy.get('#target_6', {timeout: 20000})
     cy.get('[style="font-size: 90%; background: greenyellow;"]').contains('1')
     cy.get('.divider > .ng-star-inserted > .c-pointer').click()
     cy.get('#idTargetNameRT').contains('target fake 1')
-
-
   })
 
 

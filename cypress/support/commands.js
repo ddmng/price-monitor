@@ -38,6 +38,14 @@ Cypress.Commands.add("restoreLocalStorage", () => {
   });
 });
 
+Cypress.Commands.add("startTarget", (id) => {
+  cy.request(`testbed.genesi.lan:3000/start`)
+});
+
+Cypress.Commands.add("stopTarget", (id) => {
+  cy.request(`testbed.genesi.lan:3000/stop`)
+});
+
 /* TODO:
 
 Add a test setup stage that:
