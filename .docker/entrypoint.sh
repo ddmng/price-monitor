@@ -9,7 +9,6 @@ case ${KEY} in
     healthcheck) # Runs healthcheck
         $(npm bin)/cypress run --spec 'cypress/integration/healthcheck/**/*'
     ;;
-
     *)    # unknown option
         echo "Unrecognized command"
     ;;
