@@ -31,7 +31,7 @@ install:
 cypress-e2e:
   stage: test
   script:
-    - docker run --rm e2e:ci 
+    - docker run --rm e2e:ci ci
   artifacts:
     expire_in: 1 week
     when: always
