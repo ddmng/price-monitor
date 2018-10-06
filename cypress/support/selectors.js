@@ -7,6 +7,20 @@ export default {
         loginBtn: '#idLoginButton',
         loginAlert: '.alert'
     },
+    realtime: {
+        map: '[style="width: 100%; height: 100%; display: block;"]',
+        newZoneName: ':nth-child(1) > .mr-2',
+        saveNewZoneBtn: '.p-2 > .btn-outline-primary',
+        searchZone: '.ml-2',
+        zonesList: '.dropdown-item',
+        deleteZoneBtn: '.btn-outline-danger',
+        confirmZoneDelete: '.btn-danger',
+        closeZoneMenu: '.sidebar-map-detail > .dismiss',
+        closeSideMenu: '.sidebar-map > .dismiss',
+        drawNewZoneBtn: '.pr-2 > .d-flex > .btn-sm',
+        manageZones: '.pr-1 > :nth-child(1) > .btn',
+        openSideMenu: '.open-btn'
+    },
     navbar: {
         search: ':nth-child(3) > :nth-child(2) > .nav-link',
         realtime: ':nth-child(3) > :nth-child(1) > .nav-link',
