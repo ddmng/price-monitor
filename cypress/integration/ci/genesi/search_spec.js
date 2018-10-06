@@ -1,4 +1,4 @@
-import selectors from '../../support/selectors'
+import selectors from '../../../support/selectors'
 
 describe('Search page', function () {
 

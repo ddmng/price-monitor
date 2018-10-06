@@ -1,4 +1,4 @@
-import selectors from '../../support/selectors'
+import selectors from '../../../support/selectors'
 
 describe('Login', function () {
 
@@ -8,7 +8,7 @@ describe('Login', function () {
         cy.get(selectors.login.username, {timeout: 8000})
     })
 
-    it('cy.get() - login screen check errors and redirects to realtime on success', () => {
+    it('login screen check errors and redirects to realtime on success', () => {
         cy.title().should('include', 'Genesi X')
 
         cy.get(selectors.login.username).should('have.attr', 'placeholder', 'Username')

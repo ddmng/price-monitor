@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import selectors from '../../support/selectors'
+import selectors from '../../../support/selectors'
 
 /* TODO:
  

@@ -4,8 +4,9 @@
   "description": "Genesi e2e cypress test suite",
   "scripts": {
     "start": "cypress open",
-    "ci-headed": "cypress run --headed",
-    "ci": "cypress run"
+    "ci-headed": "cypress run --headed  --spec 'cypress/integration/ci/**/*'",
+    "ci": "cypress run --spec 'cypress/integration/ci/**/*'",
+    "healthcheck": "cypress run --spec 'cypress/integration/healthcheck/**/*'"
   },
   "repository": {
     "type": "git",

@@ -11,4 +11,4 @@ RUN npm i
 COPY cypress /ng-app/cypress
 COPY cypress.json /ng-app/cypress.json
 
-CMD $(npm bin)/cypress run
+CMD $(npm bin)/cypress run --spec 'cypress/integration/ci/**/*'
