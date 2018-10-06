@@ -44,15 +44,17 @@ describe('Sidebar', function () {
         cy.get(selectors.sidebar.q).clear().type('1')
         cy.get(selectors.sidebar.targetList).contains('target1')
         cy.get(selectors.sidebar.targetList).contains('group1')
-        cy.get(selectors.sidebar.targetList).find(selectors.sidebar.rows).should('have.length', 2)
+        cy.get(selectors.sidebar.targetList).contains('target fake 1')
+        cy.get(selectors.sidebar.targetList).find(selectors.sidebar.rows).should('have.length', 3)
 
         cy.get(selectors.sidebar.q).clear().type('2')
         cy.get(selectors.sidebar.targetList).contains('target2')
         cy.get(selectors.sidebar.targetList).contains('group2')
-        cy.get(selectors.sidebar.targetList).find(selectors.sidebar.rows).should('have.length', 2)
+        cy.get(selectors.sidebar.targetList).contains('target fake 2')
+        cy.get(selectors.sidebar.targetList).find(selectors.sidebar.rows).should('have.length', 3)
 
         cy.get(selectors.sidebar.q).clear()
-        cy.get(selectors.sidebar.targetList).find(selectors.sidebar.rows).should('have.length', 7)
+        cy.get(selectors.sidebar.targetList).find(selectors.sidebar.rows).should('have.length', 10)
 
     })
 
@@ -61,6 +63,11 @@ describe('Sidebar', function () {
         cy.get(selectors.sidebar.minimizer).click()
         cy.get('body').should('have.class', 'sidebar-minimized')
         // TODO: mettere expect
+
+        cy.get(selectors.sidebar.minimizer).click()
+        cy.get('body').should('not.have.class', 'sidebar-minimized')
+
     })
+
 
 })

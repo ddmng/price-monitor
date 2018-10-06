@@ -57,7 +57,7 @@ export default {
         
         // pagination
         totals: '#idTotalItems',
-        noResults: '.text-muted',
+        noResults: '.ml-3',
         changeNumPages: '#idBtnChangeNumPages',
         lastPage: '.pagination-last > .page-link',
         activePage: '.active > .page-link',
