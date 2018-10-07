@@ -4,10 +4,12 @@ KEY="$1"
 RET="0"
 case ${KEY} in
     ci) # Runs ci tests
+        echo "Running CI tests"
         $(npm bin)/cypress run --spec 'cypress/integration/ci/**/*'
         RET="${?}"
     ;;
     healthcheck) # Runs healthcheck
+        echo "Running healthcheck"
         $(npm bin)/cypress run --spec 'cypress/integration/healthcheck/**/*'
         RET="${?}"
     ;;
