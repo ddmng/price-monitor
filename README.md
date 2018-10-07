@@ -1,7 +1,7 @@
 Genesi e2e test suite
 ---
 
-e2e test suite for GenesiX.
+e2e test suite for GenesiX and healthcheck utility for demo instance.
 
 List of tests made and still to be written:
 
@@ -19,10 +19,10 @@ List of tests made and still to be written:
     * [x] target name filter
     * [x] open/close sidebar
     * [ ] number of targets in realtime
-    * [ ] open/close realtime panel
+    * [x] open/close realtime panel
     * [ ] open deferred on target click
     * [ ] open deferred at click on target from closed sidebar
-    * [ ] realtime GPS target icon
+    * [x] realtime GPS target icon
     * [ ] HQ realtime target icon
     * [ ] play HQ audio
  * deferred page
@@ -37,7 +37,7 @@ List of tests made and still to be written:
         * [ ] zoom timeline
         * [ ] reset timeline zoom
     * multi-target
-        * [ ] todo
+        * [ ] open deferred with multiple targets
  * search
     * [x] search pressing enter
     * [ ] search clicking on button
@@ -49,14 +49,16 @@ List of tests made and still to be written:
     * [ ] zoom in/out
     * [ ] pan
     * [ ] change map style
-    * [ ] realtime target list is present
-    * [ ] realtime target list open/collapse
+    * [x] realtime target list is present
+    * [x] realtime target list open/collapse
     * [ ] fullscreen on/off
-    * [ ] open/close menu
+    * [ ] open/close map side menu
     * [ ] change map style
-    * [ ] mapo toggles---> multiple
-    * [ ] edit zones
-    * [ ] edit pois
+    * [ ] map side menu toggles
+    * [x] add new zone
+    * [ ] add new PoI
+    * [ ] edit zone
+    * [ ] edit PoI
     * [ ] zone violation in-out
     * [ ] nearby start-end
 
@@ -67,3 +69,16 @@ To test the CI script, run `npm run ci`, or `npm run ci-headed`.
 
 ## CI
 Tests are run by the CI regardless of which branch is pushed.
+
+In `package.json` there are several scripts:
+```
+  "scripts": {
+    "start": "cypress open",
+    "ci-headed": "cypress run --headed  --spec 'cypress/integration/ci/**/*'",
+    "ci": "cypress run --spec 'cypress/integration/ci/**/*'",
+    "healthcheck": "cypress run --spec 'cypress/integration/healthcheck/**/*'",
+    "clean": "rm -rf screenshots"
+  },
+```
+
+CI uses the `ci` script, while the healthcheck server host uses the `healthcheck`.
