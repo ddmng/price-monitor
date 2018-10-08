@@ -6,8 +6,7 @@ COPY package.json /app/package.json
 
 RUN yarn install
 
-COPY src/index.js /app/index.js
+COPY cypress /app/cypress
+COPY cypress.json /app/cypress.json
 
-EXPOSE 3000
-
-CMD node index.js
+CMD $(npm bin)/cypress run

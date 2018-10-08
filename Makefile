@@ -1,8 +1,5 @@
 build:
-	docker build -t genesi-e2e:dev -f .docker/Dockerfile .
+	docker build -t price-monitor -f .docker/Dockerfile .
 
-run-ci:
-	docker run -ti --rm genesi-e2e:dev ci
-
-run-hc:
-	docker run -ti --rm genesi-e2e:dev healthcheck
+run: build
+	docker run -ti --rm price-monitor

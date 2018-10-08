@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "cypress open",
+    "run": "cypress run",
     "clean": "rm -rf screenshots"
   },
   "keywords": [
