@@ -1,25 +1,15 @@
 {
-  "name": "genesi-e2e",
+  "name": "price-monitor",
   "version": "1.0.0",
-  "description": "Genesi e2e cypress test suite",
+  "description": "",
   "scripts": {
     "start": "cypress open",
-    "ci-headed": "cypress run --headed  --spec 'cypress/integration/ci/**/*'",
-    "ci": "cypress run --spec 'cypress/integration/ci/**/*'",
-    "healthcheck": "cypress run --spec 'cypress/integration/healthcheck/**/*'",
     "clean": "rm -rf screenshots"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@gitlab.genesi.lan:d.diminica/genesi-e2e.git"
-  },
   "keywords": [
-    "tests",
-    "genesi",
-    "cypress",
     "cypressjs"
   ],
-  "author": "ddm",
+  "author": "ddmng",
   "license": "ISC",
   "dependencies": {
     "cypress": "^3.1.0"

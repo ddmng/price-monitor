@@ -1,18 +1,13 @@
 FROM cypress/base:10
 
-RUN mkdir /ng-app
-WORKDIR /ng-app
+RUN mkdir /app
+WORKDIR /app
+COPY package.json /app/package.json
 
-COPY package.json /ng-app/
-COPY .docker/entrypoint.sh /ng-app/
-RUN chmod +x /ng-app/entrypoint.sh
+RUN yarn install
 
-# needed to override frontend's package.json
-RUN npm i
+COPY src/index.js /app/index.js
 
-COPY cypress /ng-app/cypress
-COPY cypress.json /ng-app/cypress.json
+EXPOSE 3000
 
-# CMD $(npm bin)/cypress run --spec 'cypress/integration/ci/**/*'
-ENTRYPOINT [ "./entrypoint.sh" ]
-CMD [ "ci" ]
+CMD node index.js
