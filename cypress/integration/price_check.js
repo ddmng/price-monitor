@@ -63,6 +63,15 @@ describe('Check prices', () => {
                 }
             })
 
+            cy.get(selectors.itemPage.salePrice).should((t) => {
+                if (t && t.text()) {
+                    out.currentPrices[ts] = {
+                        date: ts,
+                        price: `${t.text()}`
+                    }
+                }
+            })
+
             cy.get(selectors.itemPage.title).should((t) => {
                 if (t && t.text()) {
                     out.title = t.text().toString().trim()

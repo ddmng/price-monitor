@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "cypress open",
-    "run": "cypress run",
-    "clean": "rm -rf screenshots"
+    "crawler-open": "cypress open",
+    "crawler": "cypress run"
   },
   "keywords": [
     "cypressjs"
