@@ -4,6 +4,7 @@ export default {
         currentPrice: '#priceblock_ourprice',
         salePrice: '#priceblock_saleprice',
         dealPrice: '#priceblock_dealprice',
-        title: '#productTitle'
+        title: '#productTitle',
+        availability: '#availability'
     }
 }

@@ -56,7 +56,9 @@ describe('Check prices', () => {
 
             out[i] = {
                 ...out[i],
-                prices: out[i].prices || {date: `${ts}`}
+                prices: out[i].prices || {
+                    date: `${ts}`
+                }
             }
 
             cy.get(selectors.itemPage.originalPrice).should((t) => {
@@ -101,7 +103,15 @@ describe('Check prices', () => {
                     }
                 })
 
-        });
+            cy.get(selectors.itemPage.availability)
+                .should((t) => {
+                    if (t && t.text()) {
+                        out[i].availability = t.text().toString().trim()
+                    }
+                })
+
+            out[i].lastRun = `${ts}`
+        })
     })
 
     after(() => {
@@ -117,7 +127,7 @@ describe('Check prices', () => {
                 .catch(function (error) {
                     cy.log("Error adding document: ", error);
                 })
-            });
+        });
     })
 
 })
