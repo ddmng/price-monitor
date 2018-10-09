@@ -22,41 +22,55 @@ db.settings({
 
 describe('Check prices', () => {
     let fixtures = [];
-    let data = [];
+    let ts = '';
+    let out = []
 
-    before( async () => {
+    before(async () => {
+        // TODO create command here
+
+        ts = new Date().toISOString()
+
         await db.collection("prices").get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 console.log(`${doc.id} => ${doc.data()}`);
                 fixtures.push(doc.data())
             });
         });
+
+        db.collection('sessions').doc().set({
+            date: ts
+        }).then(function (docRef) {
+            console.log("Logged session");
+        }).catch(function (error) {
+            console.log("Error logging session document: ", error);
+        })
+
     })
 
     it('should take price for the item', () => {
-        fixtures.forEach((element, i) => {
-            cy.visit('' + element.url)
 
-            let out = {
-                name: element.name,
-                url: element.url,
-                currentPrices: {...element.currentPrices},
-                originalPrices: {...element.originalPrices}
+        out = [...fixtures]
+
+        fixtures.forEach((element, i) => {
+            cy.visit(`${element.url}`)
+
+            out[i] = {
+                ...out[i],
+                originalPrices: out[i].originalPrices || {},
+                currentPrices: out[i].currentPrices || {}
             }
-            let ts = `${new Date().toISOString()}`
 
             cy.get(selectors.itemPage.originalPrice).should((t) => {
                 if (t && t.text()) {
-                    out.originalPrices[ts] = {
+                    out[i]['originalPrices'][`${ts}`] = {
                         date: ts,
                         price: `${t.text()}`
                     }
                 }
             })
-
             cy.get(selectors.itemPage.currentPrice).should((t) => {
                 if (t && t.text()) {
-                    out.currentPrices[ts] = {
+                    out[i]['currentPrices'][`${ts}`] = {
                         date: ts,
                         price: `${t.text()}`
                     }
@@ -65,38 +79,46 @@ describe('Check prices', () => {
 
             cy.get(selectors.itemPage.salePrice).should((t) => {
                 if (t && t.text()) {
-                    out.currentPrices[ts] = {
+                    out[i]['currentPrices'][`${ts}`] = {
                         date: ts,
                         price: `${t.text()}`
                     }
                 }
             })
 
-            cy.get(selectors.itemPage.title).should((t) => {
+            cy.get(selectors.itemPage.dealPrice).should((t) => {
                 if (t && t.text()) {
-                    out.title = t.text().toString().trim()
+                    out[i]['currentPrices'][`${ts}`] = {
+                        date: ts,
+                        price: `${t.text()}`
+                    }
                 }
             })
-            data.push(out)
-            console.log(out)
+
+            cy.get(selectors.itemPage.title)
+                .should((t) => {
+                    if (t && t.text()) {
+                        out[i].title = t.text().toString().trim()
+                    }
+                })
 
         });
     })
 
     after(() => {
-        cy.log('Saving: ', data)
+        cy.log('Saving: ', out)
+        console.log(out)
 
-        data.forEach(f => {
-            console.log(f)
-            delete(f.__proto__)
-            db.collection('prices').doc(f.name).set(Object.assign({}, f))
+        out.forEach(element => {
+            const savedObj = Object.assign({}, element)
+            db.collection('prices').doc(`${savedObj.name}`).set(savedObj)
                 .then(function (docRef) {
                     cy.log("Document written with ID: ", docRef);
                 })
                 .catch(function (error) {
-                    cy.error("Error adding document: ", error);
-                });;
-        });
+                    cy.log("Error adding document: ", error);
+                })
+            });
     })
 
 })
