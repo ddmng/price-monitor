@@ -27,7 +27,6 @@ describe('Check prices', () => {
 
     before(async () => {
         // TODO create command here
-
         ts = new Date().toISOString()
 
         await db.collection("prices").get().then((querySnapshot) => {
@@ -36,6 +35,8 @@ describe('Check prices', () => {
                 fixtures.push(doc.data())
             });
         });
+
+        out = [...fixtures]
 
         db.collection('sessions').doc().set({
             date: ts
@@ -49,48 +50,46 @@ describe('Check prices', () => {
 
     it('should take price for the item', () => {
 
-        out = [...fixtures]
-
         fixtures.forEach((element, i) => {
             cy.visit(`${element.url}`)
+            ts = new Date().toISOString()
 
             out[i] = {
                 ...out[i],
-                originalPrices: out[i].originalPrices || {},
-                currentPrices: out[i].currentPrices || {}
+                prices: out[i].prices || {date: `${ts}`}
             }
 
             cy.get(selectors.itemPage.originalPrice).should((t) => {
                 if (t && t.text()) {
-                    out[i]['originalPrices'][`${ts}`] = {
-                        date: ts,
-                        price: `${t.text()}`
+                    out[i].prices[`${ts}`] = {
+                        ...out[i].prices[`${ts}`],
+                        original: `${t.text()}`
                     }
                 }
             })
             cy.get(selectors.itemPage.currentPrice).should((t) => {
                 if (t && t.text()) {
-                    out[i]['currentPrices'][`${ts}`] = {
-                        date: ts,
-                        price: `${t.text()}`
+                    out[i].prices[`${ts}`] = {
+                        ...out[i].prices[`${ts}`],
+                        current: `${t.text()}`
                     }
                 }
             })
 
             cy.get(selectors.itemPage.salePrice).should((t) => {
                 if (t && t.text()) {
-                    out[i]['currentPrices'][`${ts}`] = {
-                        date: ts,
-                        price: `${t.text()}`
+                    out[i].prices[`${ts}`] = {
+                        ...out[i].prices[`${ts}`],
+                        current: `${t.text()}`
                     }
                 }
             })
 
             cy.get(selectors.itemPage.dealPrice).should((t) => {
                 if (t && t.text()) {
-                    out[i]['currentPrices'][`${ts}`] = {
-                        date: ts,
-                        price: `${t.text()}`
+                    out[i].prices[`${ts}`] = {
+                        ...out[i].prices[`${ts}`],
+                        current: `${t.text()}`
                     }
                 }
             })
