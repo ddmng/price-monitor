@@ -106,7 +106,10 @@ describe('Check prices', () => {
             cy.get(selectors.itemPage.availability)
                 .should((t) => {
                     if (t && t.text()) {
-                        out[i].availability = t.text().toString().trim()
+                        out[i].prices[`${ts}`] = {
+                            ...out[i].prices[`${ts}`],
+                            availability: t.text().toString().trim()
+                        }
                     }
                 })
 
