@@ -1,4 +1,5 @@
 import { app, h } from "hyperapp";
+import { Time } from "hyperapp-fx";
 
 import * as Highcharts from "highcharts";
 
