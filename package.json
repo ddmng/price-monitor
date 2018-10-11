@@ -5,7 +5,8 @@
   "scripts": {
     "crawler-open": "cypress open",
     "crawler": "cypress run",
-    "start": "$(npm bin)/parcel index.html"
+    "start": "$(npm bin)/parcel index.html",
+    "build": "npm install && git submodule init && git submodule update && cd local_modules/hyperapp && git checkout V2 && cd ../hyperapp-fx && git checkout HAv2 && cd ../../ && $(npm bin)/parcel build index.html"
   },
   "keywords": [
     "cypressjs"
@@ -17,8 +18,7 @@
     "cypress": "^3.1.0",
     "firebase": "^5.5.3",
     "highcharts": "^6.1.4",
-    "hyperapp": "file:local_modules/hyperapp/",
-    "hyperapp-fx": "^0.0.0"
+    "hyperapp": "file:local_modules/hyperapp/"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
