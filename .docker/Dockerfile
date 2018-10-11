@@ -4,7 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY package.json /app/package.json
 
-RUN yarn install
+RUN npm install
 
 COPY cypress /app/cypress
 COPY cypress.json /app/cypress.json
