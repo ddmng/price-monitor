@@ -17,25 +17,7 @@ const blankState = {
 
 const parsePrice = (priceString) => 
   (priceString && priceString.split(' ').length)?
-    priceString.split(' ')[1]:""
-
-const Chart = ({state}) => {
-  if (state.data.length) {
-    let product = state.data[1]
-    Highcharts.chart("chart", {
-      title: {
-        text: state.data[1].name
-      },
-      series: [{
-        name: 'price',
-        data: Object.keys(product.prices).map(date => parseInt(parsePrice(product.prices[date].current)))
-      }],
-      xAxis: {
-        categories: Object.keys(product.prices)
-      },
-    });
-  }
-}
+    priceString.trim().split(' ')[1]:""
 
 const makeId = (name) => name.replace(' ', '_')
 
@@ -45,14 +27,18 @@ const PriceChart = ({state, product}) => {
         text: product.name
       },
       series: [{
-        name: 'price',
+        name: 'Current price',
         data: Object.keys(product.prices).map(date => parseInt(parsePrice(product.prices[date].current)))
+      },{
+        name: 'List price',
+        data: Object.keys(product.prices).map(date => parseInt(parsePrice(product.prices[date].original)))
       }],
       xAxis: {
         categories: Object.keys(product.prices)
       },
     }), 1000);
 }
+
 const Products = ({ state }) => (
   <div>
     <div>Products</div>
