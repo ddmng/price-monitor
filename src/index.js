@@ -1,4 +1,4 @@
-import { app, h } from "../local_modules/hyperapp/src";
+import { app, h } from "hyperapp";
 
 import * as Highcharts from "highcharts";
 
