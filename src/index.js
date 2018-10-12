@@ -55,26 +55,22 @@ const PriceChart = ({ state, product }) => {
 };
 
 const Prices = ({ state, product }) => (
-  <div>
-    <div>{product.name}</div>
-    <div>
-      {prices(product).map(p => (
-        <div>
-          <div>Original price: {p.original}</div>
-          <div>Current price: {p.current}</div>
-        </div>
-      ))}
-    </div>
+  <div class="product">
+    <div class="name">{product.name}</div>
+    {prices(product).slice(-1).map(p => (
+      <div class="prices">
+        <div class="price">Date: {p.date}</div>
+        <div class="price">Original price: {p.original}</div>
+        <div class="price">Current price: {p.current}</div>
+      </div>
+    ))}
   </div>
 );
 
 const Products = ({ state }) => (
-  <div>
-    <div>Products</div>
+  <div class="container">
     {state.data.map(product => (
-      <div>
-        <Prices state={state} product={product} />
-      </div>
+      <Prices state={state} product={product} />
     ))}
   </div>
 );
@@ -83,19 +79,13 @@ document.body.innerHTML = "";
 
 app({
   init: blankState,
-  view: state => (
-    <div>
-      <div>Status {state.status}</div>
-      <div>Errors {state.firebase}</div>
-      <Products state={state} />
-    </div>
-  ),
+  view: state => <Products state={state} />,
   container: document.body,
   subscriptions: state => [
     console.log(state),
     Time({ after: 10, action: Connect }),
     state.firebase == "connected" &&
-      Time({ every: 10000, action: FromFirebase })
+      Time({ every: 5000, action: FromFirebase })
   ]
 });
 

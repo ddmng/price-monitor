@@ -2,8 +2,8 @@
 import firebase from "firebase";
 import * as selectors from '../support/selectors'
 
-
-
+/* *************************************** */
+/* firebase */
 var config = {
     apiKey: "AIzaSyB1N3iqtOtnnKSWIjF0UtIJX1mOv72GgPU",
     authDomain: "pricemonitor-ha.firebaseapp.com",
@@ -18,12 +18,13 @@ var db = firebase.firestore();
 db.settings({
     timestampsInSnapshots: true
 });
+/* *************************************** */
+
 
 const parsePrice = priceString =>
     priceString && priceString.split(" ").length ?
     parseFloat(priceString.trim().replace(',', '.').split(" ")[1]) :
     undefined;
-
 
 describe('Check prices', () => {
     let fixtures = [];
@@ -36,8 +37,25 @@ describe('Check prices', () => {
 
         await db.collection("prices").get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-                console.log(`${doc.id} => ${doc.data()}`);
-                fixtures.push(doc.data())
+                const d = doc.data()
+
+                const o = Object
+                    .entries(d.prices)
+                    .sort((a, b) => a[0] < b[0])
+                    .slice(0, 5)
+                    .map(([k, v]) => ({
+                        [k]: v
+                    }))
+
+                const p = o.reduce((acc, element) => {
+                    console.log("-->", acc, element)
+                    return element ? Object.assign(acc, element) : {}
+                }, {})
+
+                fixtures.push({
+                    ...d,
+                    prices: d.prices ? p : {}
+                })
             });
         });
 
@@ -62,7 +80,10 @@ describe('Check prices', () => {
             out[i] = {
                 ...out[i],
                 prices: out[i].prices || {
-                    date: `${ts}`
+                    [`${ts}`]: {
+                        original: 0,
+                        current: 0
+                    }
                 }
             }
 
