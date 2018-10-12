@@ -57,18 +57,38 @@ const PriceChart = ({ state, product }) => {
 const Prices = ({ state, product }) => (
   <div class="product">
     <div class="name">{product.name}</div>
-    {prices(product).slice(-1).map(p => (
-      <div class="prices">
-        <div class="price">Date: {p.date}</div>
-        <div class="price">Original price: {p.original}</div>
-        <div class="price">Current price: {p.current}</div>
-      </div>
-    ))}
+    {prices(product)
+      .slice(-1)
+      .map(p => (
+        <div class="prices">
+          <div class="price">Date: {p.date}</div>
+          <div class="price">Original price: {p.original}</div>
+          <div class="price">Current price: {p.current}</div>
+        </div>
+      ))}
+  </div>
+);
+
+const Spinner = () => (
+  <div class="ontop">
+    <div class="lds-grid">
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+    </div>
   </div>
 );
 
 const Products = ({ state }) => (
   <div class="container">
+    {state.status == "fetching" && <Spinner />}
+
     {state.data.map(product => (
       <Prices state={state} product={product} />
     ))}
@@ -85,7 +105,8 @@ app({
     console.log(state),
     Time({ after: 10, action: Connect }),
     state.firebase == "connected" &&
-      Time({ every: 5000, action: FromFirebase })
+      state.status != "fetching" &&
+      Time({ every: 10000, action: FromFirebase })
   ]
 });
 
