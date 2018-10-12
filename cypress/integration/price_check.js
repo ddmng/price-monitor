@@ -20,9 +20,9 @@ db.settings({
 });
 
 const parsePrice = priceString =>
-  priceString && priceString.split(" ").length
-    ? parseFloat(priceString.trim().replace(',', '.').split(" ")[1])
-    : undefined;
+    priceString && priceString.split(" ").length ?
+    parseFloat(priceString.trim().replace(',', '.').split(" ")[1]) :
+    undefined;
 
 
 describe('Check prices', () => {

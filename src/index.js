@@ -16,14 +16,13 @@ const blankState = {
   data: []
 };
 
-
 const makeId = name => name.replace(" ", "_");
 
 const prices = product =>
   Object.keys(product.prices).map(date => ({
     date,
-    original: ((product.prices[date].original)),
-    current: ((product.prices[date].current))
+    original: product.prices[date].original,
+    current: product.prices[date].current
   }));
 
 const PriceChart = ({ state, product }) => {
@@ -36,14 +35,14 @@ const PriceChart = ({ state, product }) => {
         series: [
           {
             name: "Current price",
-            data: Object.keys(product.prices).map(date =>
-              ((product.prices[date].current))
+            data: Object.keys(product.prices).map(
+              date => product.prices[date].current
             )
           },
           {
             name: "List price",
-            data: Object.keys(product.prices).map(date =>
-              ((product.prices[date].original))
+            data: Object.keys(product.prices).map(
+              date => product.prices[date].original
             )
           }
         ],
