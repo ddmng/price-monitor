@@ -6,6 +6,7 @@ COPY .gitmodules /app/.gitmodules
 COPY .git /app/.git
 COPY index.html /app/index.html
 COPY src /app/src
+COPY styles /app/styles
 
 RUN mkdir -p local_modules/hyperapp
 RUN mkdir -p local_modules/hyperapp-fx
