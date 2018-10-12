@@ -6,7 +6,7 @@
     "crawler-open": "cypress open",
     "crawler": "cypress run",
     "start": "$(npm bin)/parcel index.html",
-    "build": "npm install && git submodule init && git submodule update && cd local_modules/hyperapp && git checkout V2 && cd ../hyperapp-fx && git checkout HAv2 && cd ../../ && $(npm bin)/parcel build index.html"
+    "build": "git submodule init && git submodule update && cd local_modules/hyperapp && git checkout V2 && cd ../hyperapp-fx && git checkout HAv2 && cd ../../ && npm install && $(npm bin)/parcel build index.html"
   },
   "keywords": [
     "cypressjs"

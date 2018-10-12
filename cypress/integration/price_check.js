@@ -19,6 +19,11 @@ db.settings({
     timestampsInSnapshots: true
 });
 
+const parsePrice = priceString =>
+  priceString && priceString.split(" ").length
+    ? parseFloat(priceString.trim().replace(',', '.').split(" ")[1])
+    : undefined;
+
 
 describe('Check prices', () => {
     let fixtures = [];
@@ -65,7 +70,7 @@ describe('Check prices', () => {
                 if (t && t.text()) {
                     out[i].prices[`${ts}`] = {
                         ...out[i].prices[`${ts}`],
-                        original: `${t.text()}`
+                        original: parsePrice(t.text())
                     }
                 }
             })
@@ -73,7 +78,7 @@ describe('Check prices', () => {
                 if (t && t.text()) {
                     out[i].prices[`${ts}`] = {
                         ...out[i].prices[`${ts}`],
-                        current: `${t.text()}`
+                        current: parsePrice(t.text())
                     }
                 }
             })
@@ -82,7 +87,7 @@ describe('Check prices', () => {
                 if (t && t.text()) {
                     out[i].prices[`${ts}`] = {
                         ...out[i].prices[`${ts}`],
-                        current: `${t.text()}`
+                        current: parsePrice(t.text())
                     }
                 }
             })
@@ -91,7 +96,7 @@ describe('Check prices', () => {
                 if (t && t.text()) {
                     out[i].prices[`${ts}`] = {
                         ...out[i].prices[`${ts}`],
-                        current: `${t.text()}`
+                        current: parsePrice(t.text())
                     }
                 }
             })
