@@ -62,8 +62,8 @@ const Prices = ({ state, product }) => (
       .map(p => (
         <div class="prices">
           <div class="price">Date: {p.date}</div>
-          <div class="price">Original price: {p.original}</div>
-          <div class="price">Current price: {p.current}</div>
+          <div class="price">Original price: &euro; {p.original}</div>
+          <div class="price">Current price: &euro; {p.current}</div>
         </div>
       ))}
   </div>
@@ -106,7 +106,7 @@ app({
     Time({ after: 10, action: Connect }),
     state.firebase == "connected" &&
       state.status != "fetching" &&
-      Time({ every: 10000, action: FromFirebase })
+      Time({every: 10000, action: FromFirebase })
   ]
 });
 
